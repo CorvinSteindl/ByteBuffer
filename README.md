@@ -13,7 +13,7 @@ Installation should be done via [composer](http://packagist.org/).
 ```
 {
     "require": {
-        "TrafficCophp/ByteBuffer": "dev-master"
+        "MSST/ByteBuffer": "dev-master"
     }
 }
 ```
@@ -27,7 +27,7 @@ A simple usage example could look like this
 
 require __DIR__ . '/vendor/.composer/autoload.php';
 
-use TrafficCophp\ByteBuffer\ByteBuffer;
+use MSST\ByteBuffer\ByteBuffer;
 
 $channel = 'channel_one';
 $message = 'php';

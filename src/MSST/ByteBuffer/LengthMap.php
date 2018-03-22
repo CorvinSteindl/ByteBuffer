@@ -1,6 +1,6 @@
 <?php
 
-namespace TrafficCophp\ByteBuffer;
+namespace MSST\ByteBuffer;
 
 /**
  * LengthMap
@@ -16,7 +16,10 @@ class LengthMap {
 			 'v' => 2,
 			 'V' => 4,
 			 'c' => 1,
-			 'C' => 1
+			 'C' => 1,
+             'l' => 4,
+             'Q' => 8,
+             'q' => 8
 		);
 	}
 

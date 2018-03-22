@@ -1,6 +1,6 @@
 <?php
 
-namespace TrafficCophp\ByteBuffer;
+namespace MSST\ByteBuffer;
 
 abstract class AbstractBuffer implements ReadableBuffer, WriteableBuffer {
 	abstract public function __construct($length);

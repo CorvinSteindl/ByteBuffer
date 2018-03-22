@@ -1,6 +1,6 @@
 <?php
 
-namespace TrafficCophp\ByteBuffer;
+namespace MSST\ByteBuffer;
 
 interface WriteableBuffer {
 	public function write($string, $offset);
@@ -9,4 +9,7 @@ interface WriteableBuffer {
 	public function writeInt16LE($value, $offset);
 	public function writeInt32BE($value, $offset);
 	public function writeInt32LE($value, $offset);
+	public function writeInt32($value, $offset);
+    public function writeUInt64($value, $offset);
+    public function writeInt64($value, $offset);
 }

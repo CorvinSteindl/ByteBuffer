@@ -1,6 +1,6 @@
 <?php
 
-namespace TrafficCophp\ByteBuffer;
+namespace MSST\ByteBuffer;
 
 /**
  * ByteBuffer
@@ -114,6 +114,24 @@ class Buffer extends AbstractBuffer {
 		$this->insert($format, $value, $offset, $this->lengthMap->getLengthFor($format));
 	}
 
+    public function writeInt32($value, $offset) {
+        $format = 'l';
+        $this->checkForOverSize(0xffffffff, $value);
+        $this->insert($format, $value, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    public function writeUInt64($value, $offset) {
+        $format = 'Q';
+        $this->checkForOverSize(0xffffffffffff, $value);
+        $this->insert($format, $value, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    public function writeInt64($value, $offset) {
+        $format = 'q';
+        $this->checkForOverSize(0xffffffffffff, $value);
+        $this->insert($format, $value, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
 	public function read($offset, $length) {
 		$format = 'a' . $length;
 		return $this->extract($format, $offset, $length);
@@ -143,5 +161,20 @@ class Buffer extends AbstractBuffer {
 		$format = 'V';
 		return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
 	}
+
+    public function readInt32($offset) {
+        $format = 'l';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    public function readUInt64($offset) {
+        $format = 'Q';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    public function readInt64($offset) {
+        $format = 'q';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
 
 }

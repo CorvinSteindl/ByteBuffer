@@ -1,7 +1,7 @@
 {
-	"name": "TrafficCophp/ByteBuffer",
+	"name": "MSST/ByteBuffer",
 	"type": "library",
-	"description": "Node.js inspired byte stream buffer for PHP.",
+	"description": "Node.js inspired byte stream buffer for PHP. (Orginal by Ole 'nesQuick' Michaelis)",
 	"keywords": ["Buffer", "Stream", "Socket", "Library", "Bytehandling", "pack", "wrapper", "binary data"],
 	"license": "MIT",
 	"authors": [
@@ -9,11 +9,16 @@
 			"name": "Ole 'nesQuick' Michaelis",
 			"email": "ole.michaelis@googlemail.com",
 			"homepage": "http://www.codestars.eu"
+		},
+		{
+			"name": "Corvin Steindl",
+			"email": "corvin.steindl@msst.org",
+			"homepage": "https://www.msst.org"
 		}
 	],
 	"autoload": {
 		"psr-4": {
-			"TrafficCophp\\ByteBuffer\\": "src/TrafficCophp/ByteBuffer/"
+			"MSST\\ByteBuffer\\": "src/MSST/ByteBuffer/"
 		}
 	},
 	"require": {}
