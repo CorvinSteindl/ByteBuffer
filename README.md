@@ -13,7 +13,7 @@ Installation should be done via [composer](http://packagist.org/).
 ```
 {
     "require": {
-        "MSST/ByteBuffer": "dev-master"
+        "msst/byte-buffer": "dev-master"
     }
 }
 ```
