@@ -25,7 +25,7 @@ A simple usage example could look like this
 ```php
 <?php
 
-require __DIR__ . '/vendor/.composer/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use MSST\ByteBuffer\Buffer;
 
