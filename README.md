@@ -51,7 +51,7 @@ socket_write($socket, (string) $buffer, $buffer->length());
 ```
 
 ## Testing
-
+Just working under php > 7.1
 ```
 ./vendor/bin/phpunit
 ```
