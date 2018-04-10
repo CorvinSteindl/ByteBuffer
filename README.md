@@ -1,4 +1,5 @@
 # PHP Library for reading and writing binary data
+[![Build Status](https://travis-ci.org/CorvinSteindl/ByteBuffer.svg?branch=master)](https://travis-ci.org/CorvinSteindl/ByteBuffer)
 
 This is a improved rewrite of the [Project from OleMchls](https://github.com/OleMchls/ByteBuffer)
 You can also call this a [pack()](http://www.php.net/manual/en/function.pack.php) wrapper.
