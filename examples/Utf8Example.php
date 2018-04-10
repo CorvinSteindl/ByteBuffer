@@ -4,13 +4,21 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use MSST\ByteBuffer\Buffer;
 
-$text = "This is an utf8 test message. 😄";
-$textUtf8Length = strlen(utf8_encode($text));
+$text1 = "This is the first utf8 test message. 😄";
+$text1Utf8Length = strlen(utf8_encode($text1));
 
-echo PHP_EOL . "Original text: " . $text . PHP_EOL . PHP_EOL;
+$text2 = "This is the second utf8 test message. 😉";
+$text2Utf8Length = strlen(utf8_encode($text2));
 
-$buffer = new Buffer($textUtf8Length);
-$buffer->writeUtf8($text);
+echo PHP_EOL;
+echo 'Original text 1: ' . $text1 . PHP_EOL;
+echo 'Original text 2: ' . $text2 . PHP_EOL;
+echo PHP_EOL;
 
-echo "Buffer length: " . $buffer->length() . PHP_EOL;
-echo "Buffer readUtf8: " . $buffer->readUtf8(0, $textUtf8Length) . PHP_EOL . PHP_EOL;
+$buffer = new Buffer($text1Utf8Length + $text2Utf8Length);
+$buffer->writeUtf8($text1);
+$buffer->writeUtf8($text2);
+
+echo "Buffer readUtf8: " . $buffer->readUtf8(0, $text1Utf8Length) . PHP_EOL;
+echo "Buffer readUtf8: " . $buffer->readUtf8($text1Utf8Length, $text2Utf8Length) . PHP_EOL;
+echo PHP_EOL;
