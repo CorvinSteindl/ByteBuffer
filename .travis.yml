@@ -9,4 +9,4 @@ php:
 before_script:
   - composer install
 
-script: $TRAVIS_BUILD_DIR/vendor/bin/phpunit --configuration $TRAVIS_BUILD_DIR/phpunit.xml
+script: vendor/bin/phpunit --configuration phpunit.xml
