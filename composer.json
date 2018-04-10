@@ -1,19 +1,24 @@
 {
 	"name": "msst/byte-buffer",
 	"type": "library",
-	"description": "Node.js inspired byte stream buffer for PHP. (Orginal by Ole 'nesQuick' Michaelis)",
+	"description": "A wrapper for the PHP pack() function. Simple handling of bytes in PHP (original by Ole 'nesQuick' Michaelis)",
 	"keywords": ["Buffer", "Stream", "Socket", "Library", "Bytehandling", "pack", "wrapper", "binary data"],
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Ole 'nesQuick' Michaelis",
-			"email": "ole.michaelis@googlemail.com",
-			"homepage": "http://www.codestars.eu"
-		},
-		{
 			"name": "Corvin Steindl",
 			"email": "corvin.steindl@msst.org",
 			"homepage": "https://www.msst.org"
+		},
+		{
+			"name": "Patrick Schaub",
+			"email": "patrick.schaub@msst.org",
+			"homepage": "https://www.msst.org"
+		},
+		{
+			"name": "Ole 'nesQuick' Michaelis",
+			"email": "ole.michaelis@googlemail.com",
+			"homepage": "http://www.codestars.eu"
 		}
 	],
 	"autoload": {
@@ -21,5 +26,8 @@
 			"MSST\\ByteBuffer\\": "src/MSST/ByteBuffer/"
 		}
 	},
-	"require": {}
+	"require": {},
+	"require-dev": {
+		"phpunit/phpunit": "^7"
+	}
 }
