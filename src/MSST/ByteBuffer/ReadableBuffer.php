@@ -3,7 +3,8 @@
 namespace MSST\ByteBuffer;
 
 interface ReadableBuffer {
-	public function read($start, $end);
+	public function read($offset, $length);
+	public function readUtf8($offset, $length);
 	public function readInt8($offset);
 	public function readInt16BE($offset);
 	public function readInt16LE($offset);

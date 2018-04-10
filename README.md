@@ -27,30 +27,23 @@ A simple usage example could look like this
 
 require __DIR__ . '/vendor/.composer/autoload.php';
 
-use MSST\ByteBuffer\ByteBuffer;
+use MSST\ByteBuffer\Buffer;
 
 $channel = 'channel_one';
 $message = 'php';
 
-$buffer = new ByteBuffer(4 + 1 + 4 + strlen($channel) + strlen($message));
-$buffer->writeInt32BE($buffer->length(), 0);
-$buffer->writeInt8(0x1, 4);
-$buffer->writeInt32BE(strlen($channel), 5);
-$buffer->write($channel, 9);
-$buffer->write($message, 9 + strlen($channel));
+$buffer = new Buffer(4 + 1 + 4 + strlen($channel) + strlen($message));
+$buffer->writeInt32BE($buffer->length());
+$buffer->writeInt8(0x1);
+$buffer->writeInt32BE(strlen($channel));
+$buffer->write($channel);
+$buffer->write($message);
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 $result = socket_connect($socket, '127.0.0.1', 3542);
 
 socket_write($socket, (string) $buffer, $buffer->length());
 ```
-
-## ToDo's
-
-* Write Documentation
-* Improve examples
-* Allow Buffer as constructor
-* Write test for concatinating buffers
 
 ## License
 
