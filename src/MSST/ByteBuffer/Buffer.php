@@ -183,7 +183,7 @@ class Buffer extends AbstractBuffer
      */
     public function writeUInt16($value)
     {
-        $format = 's';
+        $format = 'S';
         $this->checkForOverSize(0xffff, $value);
         $this->insert($format, $value);
     }
@@ -193,7 +193,7 @@ class Buffer extends AbstractBuffer
      */
     public function writeInt16($value)
     {
-        $format = 'S';
+        $format = 's';
         $this->checkForOverSize(0xffff, $value);
         $this->insert($format, $value);
     }
@@ -201,7 +201,7 @@ class Buffer extends AbstractBuffer
     /**
      * @param $value
      */
-    public function writeInt16BE($value)
+    public function writeUInt16BE($value)
     {
         $format = 'n';
         $this->checkForOverSize(0xffff, $value);
@@ -211,7 +211,7 @@ class Buffer extends AbstractBuffer
     /**
      * @param $value
      */
-    public function writeInt16LE($value)
+    public function writeUInt16LE($value)
     {
         $format = 'v';
         $this->checkForOverSize(0xffff, $value);
@@ -220,9 +220,8 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $value
-     * @param null $offset
      */
-    public function writeInt32BE($value)
+    public function writeUInt32BE($value)
     {
         $format = 'N';
         $this->checkForOverSize(0xffffffff, $value);
@@ -232,7 +231,7 @@ class Buffer extends AbstractBuffer
     /**
      * @param $value
      */
-    public function writeInt32LE($value)
+    public function writeUInt32LE($value)
     {
         $format = 'V';
         $this->checkForOverSize(0xffffffff, $value);
@@ -343,7 +342,7 @@ class Buffer extends AbstractBuffer
      * @param $offset
      * @return int
      */
-    public function readInt16($offset)
+    public function readUInt16($offset)
     {
         $format = 'S';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
@@ -353,7 +352,17 @@ class Buffer extends AbstractBuffer
      * @param $offset
      * @return int
      */
-    public function readInt16BE($offset)
+    public function readInt16($offset)
+    {
+        $format = 's';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    /**
+     * @param $offset
+     * @return int
+     */
+    public function readUInt16BE($offset)
     {
         $format = 'n';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
@@ -363,7 +372,7 @@ class Buffer extends AbstractBuffer
      * @param $offset
      * @return int
      */
-    public function readInt16LE($offset)
+    public function readUInt16LE($offset)
     {
         $format = 'v';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
@@ -373,7 +382,7 @@ class Buffer extends AbstractBuffer
      * @param $offset
      * @return int
      */
-    public function readInt32BE($offset)
+    public function readUInt32BE($offset)
     {
         $format = 'N';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
@@ -383,7 +392,7 @@ class Buffer extends AbstractBuffer
      * @param $offset
      * @return int
      */
-    public function readInt32LE($offset)
+    public function readUInt32LE($offset)
     {
         $format = 'V';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
