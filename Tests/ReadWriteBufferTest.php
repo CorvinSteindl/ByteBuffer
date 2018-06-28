@@ -3,13 +3,6 @@
 use MSST\ByteBuffer\Buffer;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Created by PhpStorm.
- * User: Corvin Steindl
- * Date: 10.04.18
- * Time: 16:58
- */
-
 class ReadWriteBufferTest extends TestCase
 {
     public function testWriteAndReadUTF8Buffer()

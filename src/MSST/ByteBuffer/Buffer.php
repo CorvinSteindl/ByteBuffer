@@ -7,7 +7,6 @@ namespace MSST\ByteBuffer;
  */
 class Buffer extends AbstractBuffer
 {
-
     const DEFAULT_FORMAT = 'x';
 
     /**
@@ -26,19 +25,18 @@ class Buffer extends AbstractBuffer
     protected $offsetCounter;
 
     /**
-     * Buffer constructor.
-     * @param $argument
+     * @param string|int $bufferSize The size of the buffer
      */
-    public function __construct($argument)
+    public function __construct($bufferSize)
     {
         $this->offsetCounter = 0;
         $this->lengthMap = new LengthMap();
-        if (is_string($argument)) {
-            $this->initializeStructs(strlen($argument), $argument);
-        } else if (is_int($argument)) {
-            $this->initializeStructs($argument, pack(self::DEFAULT_FORMAT . $argument));
+        if (is_string($bufferSize)) {
+            $this->initializeStructs(strlen($bufferSize), $bufferSize);
+        } else if (is_int($bufferSize)) {
+            $this->initializeStructs($bufferSize, pack(self::DEFAULT_FORMAT . $bufferSize));
         } else {
-            throw new \InvalidArgumentException('Constructor argument must be an binary string or integer');
+            throw new \InvalidArgumentException('Constructor argument must be an binary string or integer.');
         }
     }
 
@@ -90,7 +88,7 @@ class Buffer extends AbstractBuffer
      * @param $format
      * @param $offset
      * @param $length
-     * @return float|int
+     * @return int
      */
     protected function extract($format, $offset, $length)
     {
@@ -111,13 +109,13 @@ class Buffer extends AbstractBuffer
     }
 
     /**
-     * @param $excpected_max
+     * @param $expectedMax
      * @param $actual
      */
-    protected function checkForOverSize($excpected_max, $actual)
+    protected function checkForOverSize($expectedMax, $actual)
     {
-        if ($actual > $excpected_max) {
-            throw new \InvalidArgumentException(sprintf('%d exceeded limit of %d', $actual, $excpected_max));
+        if ($actual > $expectedMax) {
+            throw new \InvalidArgumentException(sprintf('%d exceeded limit of %d', $actual, $expectedMax));
         }
     }
 
@@ -163,10 +161,40 @@ class Buffer extends AbstractBuffer
     /**
      * @param $value
      */
-    public function writeInt8($value)
+    public function writeUInt8($value)
     {
         $format = 'C';
         $this->checkForOverSize(0xff, $value);
+        $this->insert($format, $value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function writeInt8($value)
+    {
+        $format = 'c';
+        $this->checkForOverSize(0xff, $value);
+        $this->insert($format, $value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function writeUInt16($value)
+    {
+        $format = 's';
+        $this->checkForOverSize(0xffff, $value);
+        $this->insert($format, $value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function writeInt16($value)
+    {
+        $format = 'S';
+        $this->checkForOverSize(0xffff, $value);
         $this->insert($format, $value);
     }
 
@@ -214,6 +242,16 @@ class Buffer extends AbstractBuffer
     /**
      * @param $value
      */
+    public function writeUInt32($value)
+    {
+        $format = 'L';
+        $this->checkForOverSize(0xffffffff, $value);
+        $this->insert($format, $value);
+    }
+
+    /**
+     * @param $value
+     */
     public function writeInt32($value)
     {
         $format = 'l';
@@ -242,9 +280,27 @@ class Buffer extends AbstractBuffer
     }
 
     /**
+     * @param $value
+     */
+    public function writeDouble($value)
+    {
+        $format = 'd';
+        $this->insert($format, $value);
+    }
+
+    /**
+     * @param $value
+     */
+    public function writeFloat($value)
+    {
+        $format = 'f';
+        $this->insert($format, $value);
+    }
+
+    /**
      * @param $offset
      * @param $length
-     * @return float|int
+     * @return int
      */
     public function read($offset, $length)
     {
@@ -265,9 +321,9 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
-    public function readInt8($offset)
+    public function readUInt8($offset)
     {
         $format = 'C';
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
@@ -275,7 +331,27 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
+     */
+    public function readInt8($offset)
+    {
+        $format = 'c';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    /**
+     * @param $offset
+     * @return int
+     */
+    public function readInt16($offset)
+    {
+        $format = 'S';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    /**
+     * @param $offset
+     * @return int
      */
     public function readInt16BE($offset)
     {
@@ -285,7 +361,7 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
     public function readInt16LE($offset)
     {
@@ -295,7 +371,7 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
     public function readInt32BE($offset)
     {
@@ -305,7 +381,7 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
     public function readInt32LE($offset)
     {
@@ -315,7 +391,17 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
+     */
+    public function readUInt32($offset)
+    {
+        $format = 'L';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    /**
+     * @param $offset
+     * @return int
      */
     public function readInt32($offset)
     {
@@ -325,7 +411,7 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
     public function readUInt64($offset)
     {
@@ -335,7 +421,7 @@ class Buffer extends AbstractBuffer
 
     /**
      * @param $offset
-     * @return float|int
+     * @return int
      */
     public function readInt64($offset)
     {
@@ -343,4 +429,23 @@ class Buffer extends AbstractBuffer
         return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
     }
 
+    /**
+     * @param $offset
+     * @return double
+     */
+    public function readDouble($offset)
+    {
+        $format = 'd';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
+
+    /**
+     * @param $offset
+     * @return float
+     */
+    public function readFloat($offset)
+    {
+        $format = 'f';
+        return $this->extract($format, $offset, $this->lengthMap->getLengthFor($format));
+    }
 }
